@@ -1,4 +1,5 @@
 import React from "react";
+import toast from "react-hot-toast";
 
 const AddCoffee = () => {
    const handleAddCoffee = (e) => {
@@ -6,10 +7,9 @@ const AddCoffee = () => {
       const form = e.target;
       const formData = new FormData(form);
       const coffeeData = Object.fromEntries(formData.entries());
-      console.log(coffeeData);
 
       // Send coffee data to the DB
-      fetch(`${import.meta.env.URL}/coffees`, {
+      fetch(`${import.meta.env.VITE_URL}/coffees`, {
          method: "POST",
          headers: {
             "content-type": "application/json",
@@ -18,7 +18,10 @@ const AddCoffee = () => {
       })
          .then((res) => res.json())
          .then((data) => {
-            console.log(data);
+            if (data.insertedId) {
+               toast.success("Coffee Added Successfully");
+               form.reset();
+            }
          });
    };
 
@@ -112,7 +115,7 @@ const AddCoffee = () => {
             <input
                type="submit"
                value="Add Coffee"
-               className="bg-accent w-full py-2 rancho text-[18px] border-2 border-[#331A15] rounded-[5px] my-6 cursor-pointer"
+               className="bg-accent w-full py-2 rancho text-[20px] border-2 border-[#331A15] rounded-[5px] my-6 cursor-pointer"
             />
          </form>
       </div>
