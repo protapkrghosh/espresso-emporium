@@ -19,7 +19,7 @@ const AddCoffee = () => {
          .then((res) => res.json())
          .then((data) => {
             if (data.insertedId) {
-               toast.success("Coffee Added Successfully");
+               toast.success("Coffee added successfully");
                form.reset();
             }
          });
@@ -82,11 +82,11 @@ const AddCoffee = () => {
                </fieldset>
 
                <fieldset className="fieldset">
-                  <label className="label">Category</label>
+                  <label className="label">Price</label>
                   <input
                      type="text"
-                     name="category"
-                     placeholder="Enter coffee category"
+                     name="price"
+                     placeholder="Enter coffee price"
                      className="input w-full focus-within:border-accent focus:outline-0"
                   />
                </fieldset>
@@ -115,7 +115,7 @@ const AddCoffee = () => {
             <input
                type="submit"
                value="Add Coffee"
-               className="bg-accent w-full py-2 rancho text-[20px] border-2 border-[#331A15] rounded-[5px] my-6 cursor-pointer"
+               className="bg-accent btnHover w-full py-2 rancho text-[20px] border-2 border-[#331A15] rounded-[5px] my-6 cursor-pointer"
             />
          </form>
       </div>

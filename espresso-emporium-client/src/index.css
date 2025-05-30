@@ -21,3 +21,7 @@ body {
 .rancho {
    font-family: "Rancho", cursive;
 }
+
+.btnHover {
+   @apply hover:bg-[#c5a983] duration-200
+}

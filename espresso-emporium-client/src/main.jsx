@@ -16,6 +16,7 @@ const router = createBrowserRouter([
          {
             index: true,
             Component: Home,
+            loader: () => fetch(`${import.meta.env.VITE_URL}/coffees`),
          },
          {
             path: "addCoffee",
