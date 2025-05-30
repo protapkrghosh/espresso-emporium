@@ -1,10 +1,33 @@
 import React from "react";
 
 const AddCoffee = () => {
+   const handleAddCoffee = (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const coffeeData = Object.fromEntries(formData.entries());
+      console.log(coffeeData);
+
+      // Send coffee data to the DB
+      fetch(`${import.meta.env.URL}/coffees`, {
+         method: "POST",
+         headers: {
+            "content-type": "application/json",
+         },
+         body: JSON.stringify(coffeeData),
+      })
+         .then((res) => res.json())
+         .then((data) => {
+            console.log(data);
+         });
+   };
+
    return (
       <div className="bg-base-200 border-base-300 rounded-box border p-10 m-28">
          <div className="space-y-8 text-center mb-8">
-            <h1 className="rancho text-primary text-5xl">Add New Coffee</h1>
+            <h1 className="rancho text-primary text-5xl text-shadow-lg text-shadow-slate-400">
+               Add New Coffee
+            </h1>
             <p className="text-secondary text-[18px] md:w-[88%] mx-auto">
                It is a long established fact that a reader will be distraceted
                by the readable content of a page when looking at its layout. The
@@ -13,7 +36,7 @@ const AddCoffee = () => {
             </p>
          </div>
 
-         <form>
+         <form onSubmit={handleAddCoffee}>
             <div className="grid md:grid-cols-2 gap-6">
                <fieldset className="fieldset">
                   <label className="label">Name</label>

@@ -10,9 +10,7 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vrk8jch.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
-
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.MONGODB_URI, {
    serverApi: {
       version: ServerApiVersion.v1,
       strict: true,
@@ -22,7 +20,16 @@ const client = new MongoClient(uri, {
 
 async function run() {
    try {
-      await client.connect();
+      // await client.connect();
+
+      const database = client.db("espressoDB");
+      const coffeeCollection = database.collection("coffees");
+
+      app.post("/coffees", async (req, res) => {
+         const newCoffee = req.body;
+         const result = await coffeeCollection.insertOne(newCoffee);
+         res.send(result);
+      });
 
       await client.db("admin").command({ ping: 1 });
       console.log(
