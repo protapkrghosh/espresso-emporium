@@ -5,7 +5,7 @@ import { FaTrashCan } from "react-icons/fa6";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee, onDelete }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
    const { _id, name, photo, chef, price } = coffee;
 
    const handleDelete = (_id) => {
@@ -30,7 +30,12 @@ const CoffeeCard = ({ coffee, onDelete }) => {
                         "Your coffee has been deleted.",
                         "success"
                      );
-                     onDelete(_id);
+
+                     // Remove the coffee from the state
+                     const remainingCoffees = coffees.filter(
+                        (coffee) => coffee._id !== _id
+                     );
+                     setCoffees(remainingCoffees);
                   }
                });
          }

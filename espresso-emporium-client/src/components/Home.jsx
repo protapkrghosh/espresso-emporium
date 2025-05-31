@@ -7,15 +7,6 @@ const Home = () => {
    const loadedCoffees = useLoaderData();
    const [coffees, setCoffees] = useState(loadedCoffees);
 
-   useEffect(() => {
-      setCoffees(loadedCoffees);
-   }, [loadedCoffees]);
-
-   const handleDelete = (id) => {
-      const remaining = coffees.filter((coffee) => coffee._id !== id);
-      setCoffees(remaining);
-   };
-
    return (
       <div className="text-center backgroundImg1">
          <div className="p-28 backgroundImg2">
@@ -36,7 +27,8 @@ const Home = () => {
                   <CoffeeCard
                      key={coffee._id}
                      coffee={coffee}
-                     onDelete={handleDelete}
+                     coffees={coffees}
+                     setCoffees={setCoffees}
                   />
                ))}
             </div>
