@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import CoffeeCard from "./CoffeeCard";
 import { BsCupFill } from "react-icons/bs";
-import cup from '../assets/more/12.png'
-import shop from '../assets/more/5.png'
 
 const Home = () => {
-   const coffees = useLoaderData();
+   const loadedCoffees = useLoaderData();
+   const [coffees, setCoffees] = useState([]);
+
+   useEffect(() => {
+      setCoffees(loadedCoffees);
+   }, [loadedCoffees]);
+
+   const handleDelete = (id) => {
+      const remaining = coffees.filter((coffee) => coffee._id !== id);
+      setCoffees(remaining);
+   };
 
    return (
       <div className="text-center backgroundImg1">
@@ -25,7 +33,11 @@ const Home = () => {
 
             <div className="grid md:grid-cols-2 gap-6 mt-12 max-w-7xl mx-auto">
                {coffees.map((coffee) => (
-                  <CoffeeCard key={coffee._id} coffee={coffee} />
+                  <CoffeeCard
+                     key={coffee._id}
+                     coffee={coffee}
+                     onDelete={handleDelete}
+                  />
                ))}
             </div>
          </div>

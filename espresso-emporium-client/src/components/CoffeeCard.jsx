@@ -4,7 +4,7 @@ import { FaPencil } from "react-icons/fa6";
 import { FaTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, onDelete }) => {
    const { _id, name, photo, chef, price } = coffee;
 
    const handleDelete = (_id) => {
@@ -24,11 +24,12 @@ const CoffeeCard = ({ coffee }) => {
                .then((res) => res.json())
                .then((data) => {
                   if (data.deletedCount) {
-                     Swal.fire({
-                        title: "Deleted!",
-                        text: "Your coffee has been deleted.",
-                        icon: "success",
-                     });
+                     Swal.fire(
+                        "Deleted!",
+                        "Your coffee has been deleted.",
+                        "success"
+                     );
+                     onDelete(_id);
                   }
                });
          }
@@ -47,16 +48,13 @@ const CoffeeCard = ({ coffee }) => {
             <p>Price: ${price}</p>
          </div>
 
-         {/* Actionable button */}
          <div className="space-y-3">
             <div className="text-white bg-[#D2B48C] hover:bg-[#bda17d] p-2 w-fit rounded-[5px] cursor-pointer duration-200">
                <FaEye />
             </div>
-
             <div className="text-white bg-[#3C393B] hover:bg-[#5e595c] p-2 w-fit rounded-[5px] cursor-pointer duration-200">
                <FaPencil />
             </div>
-
             <div
                onClick={() => handleDelete(_id)}
                className="text-white bg-[#EA4744] hover:bg-red-600 p-2 w-fit rounded-[5px] cursor-pointer duration-200"
@@ -67,5 +65,6 @@ const CoffeeCard = ({ coffee }) => {
       </div>
    );
 };
+
 
 export default CoffeeCard;
