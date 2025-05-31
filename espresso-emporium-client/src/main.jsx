@@ -7,6 +7,7 @@ import MainLayout from "./Layouts/MainLayout.jsx";
 import Home from "./components/Home.jsx";
 import AddCoffee from "./components/AddCoffee.jsx";
 import UpdateCoffee from "./components/UpdateCoffee.jsx";
+import CoffeeDetails from "./components/CoffeeDetails.jsx";
 
 const router = createBrowserRouter([
    {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
          {
             path: "addCoffee",
             Component: AddCoffee,
+         },
+         {
+            path: "details/:id",
+            Component: CoffeeDetails,
+            loader: () => fetch(`${import.meta.env.VITE_URL}/coffees`),
          },
          {
             path: "updateCoffee",
