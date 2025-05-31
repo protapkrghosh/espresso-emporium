@@ -5,7 +5,7 @@ import { BsCupFill } from "react-icons/bs";
 
 const Home = () => {
    const loadedCoffees = useLoaderData();
-   const [coffees, setCoffees] = useState([]);
+   const [coffees, setCoffees] = useState(loadedCoffees);
 
    useEffect(() => {
       setCoffees(loadedCoffees);
@@ -25,7 +25,7 @@ const Home = () => {
             </h1>
 
             <Link
-               to={"/addCoffee"}
+               to={"/add-coffee"}
                className="bg-accent btnHover px-4 py-2 rancho text-[20px] border-2 border-[#331A15] rounded-[5px] my-6 cursor-pointer flex items-center gap-2 mx-auto w-fit"
             >
                Add Coffee <BsCupFill />

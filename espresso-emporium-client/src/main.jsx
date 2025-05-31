@@ -20,7 +20,7 @@ const router = createBrowserRouter([
             loader: () => fetch(`${import.meta.env.VITE_URL}/coffees`),
          },
          {
-            path: "addCoffee",
+            path: "add-coffee",
             Component: AddCoffee,
          },
          {
@@ -29,8 +29,9 @@ const router = createBrowserRouter([
             loader: () => fetch(`${import.meta.env.VITE_URL}/coffees`),
          },
          {
-            path: "updateCoffee",
+            path: "update-coffee/:id",
             Component: UpdateCoffee,
+            loader: () => fetch(`${import.meta.env.VITE_URL}/coffees`),
          },
       ],
    },

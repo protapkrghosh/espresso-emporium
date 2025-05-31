@@ -49,16 +49,18 @@ const CoffeeCard = ({ coffee, onDelete }) => {
             <p>Price: ${price}</p>
          </div>
 
-         <div className="space-y-3">
+         <div>
             <Link to={`/details/${_id}`}>
                <div className="text-white bg-[#D2B48C] hover:bg-[#bda17d] p-2 w-fit rounded-[5px] cursor-pointer duration-200">
                   <FaEye />
                </div>
             </Link>
 
-            <div className="text-white bg-[#3C393B] hover:bg-[#5e595c] p-2 w-fit rounded-[5px] cursor-pointer duration-200 mt-3">
-               <FaPencil />
-            </div>
+            <Link to={`update-coffee/${_id}`}>
+               <div className="text-white bg-[#3C393B] hover:bg-[#5e595c] p-2 w-fit rounded-[5px] cursor-pointer duration-200 my-3">
+                  <FaPencil />
+               </div>
+            </Link>
 
             <div
                onClick={() => handleDelete(_id)}
