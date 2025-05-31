@@ -7,7 +7,6 @@ import shop from '../assets/more/5.png'
 
 const Home = () => {
    const coffees = useLoaderData();
-   console.log(coffees);
 
    return (
       <div className="text-center backgroundImg1">
