@@ -23,5 +23,16 @@ body {
 }
 
 .btnHover {
-   @apply hover:bg-[#c5a983] duration-200
+   @apply hover:bg-[#fff] duration-200
+}
+
+.backgroundImg1 {
+   background-image: url(../src/assets/more/4.png);
+   background-repeat: no-repeat;
+}
+
+.backgroundImg2 {
+   background-image: url(../src/assets/more/5.png);
+   background-repeat: no-repeat;
+   background-position: right bottom;
 }
