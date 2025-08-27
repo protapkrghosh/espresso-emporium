@@ -4,17 +4,35 @@ import "./index.css";
 import { Toaster } from "react-hot-toast";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
+import MainLayout from "./layouts/MainLayout";
+import Home from "./components/Home";
+import AddCoffee from "./components/AddCoffee";
+import UpdateCoffee from "./components/UpdateCoffee";
 
 const router = createBrowserRouter([
    {
       path: "/",
-      element: <div>Hello World</div>,
+      Component: MainLayout,
+      children: [
+         {
+            index: true,
+            Component: Home,
+         },
+         {
+            path: "add-coffee",
+            Component: AddCoffee,
+         },
+         {
+            path: "update-coffee",
+            Component: UpdateCoffee,
+         },
+      ],
    },
 ]);
 
 createRoot(document.getElementById("root")).render(
    <StrictMode>
-      <RouterProvider router={router} />,
+      <RouterProvider router={router} />
       <Toaster />
    </StrictMode>
 );

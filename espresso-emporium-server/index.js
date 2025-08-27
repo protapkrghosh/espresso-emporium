@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const client = new MongoClient(process.env.DB_URI, {
+const client = new MongoClient(process.env.COFFEE_DB_URI, {
    serverApi: {
       version: ServerApiVersion.v1,
       strict: true,
