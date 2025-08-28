@@ -7,7 +7,7 @@ const AddCoffee = () => {
       e.preventDefault();
       const form = e.target;
       const formData = new FormData(form);
-      const newCoffee = Object.fromEntries(formData);
+      const newCoffee = Object.fromEntries(formData.entries());
 
       // Send coffee data to the DB
       fetch(`${import.meta.env.VITE_BASE_URL}/coffees`, {
@@ -59,6 +59,7 @@ const AddCoffee = () => {
                         type="text"
                         name="name"
                         placeholder="Enter coffee name"
+                        required
                         className="input w-full focus-within:border-accent focus:outline-0"
                      />
                   </fieldset>
@@ -71,6 +72,7 @@ const AddCoffee = () => {
                         type="text"
                         name="chef"
                         placeholder="Enter coffee chef"
+                        required
                         className="input w-full focus-within:border-accent focus:outline-0"
                      />
                   </fieldset>
@@ -83,6 +85,7 @@ const AddCoffee = () => {
                         type="text"
                         name="supplier"
                         placeholder="Enter coffee supplier"
+                        required
                         className="input w-full focus-within:border-accent focus:outline-0"
                      />
                   </fieldset>
@@ -95,6 +98,7 @@ const AddCoffee = () => {
                         type="text"
                         name="taste"
                         placeholder="Enter coffee taste"
+                        required
                         className="input w-full focus-within:border-accent focus:outline-0"
                      />
                   </fieldset>
@@ -107,6 +111,7 @@ const AddCoffee = () => {
                         type="text"
                         name="price"
                         placeholder="Enter coffee price"
+                        required
                         className="input w-full focus-within:border-accent focus:outline-0"
                      />
                   </fieldset>
@@ -119,6 +124,7 @@ const AddCoffee = () => {
                         type="text"
                         name="details"
                         placeholder="Enter coffee details"
+                        required
                         className="input w-full focus-within:border-accent focus:outline-0"
                      />
                   </fieldset>
@@ -132,6 +138,7 @@ const AddCoffee = () => {
                      type="text"
                      name="photo"
                      placeholder="Enter photo URL"
+                     required
                      className="input w-full focus-within:border-accent focus:outline-0"
                   />
                </fieldset>

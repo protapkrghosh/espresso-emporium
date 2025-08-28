@@ -32,7 +32,9 @@ const router = createBrowserRouter([
             Component: CoffeeDetails,
          },
          {
-            path: "update-coffee",
+            path: "update/:id",
+            loader: ({ params }) =>
+               fetch(`${import.meta.env.VITE_BASE_URL}/coffees/${params.id}`),
             Component: UpdateCoffee,
          },
          {

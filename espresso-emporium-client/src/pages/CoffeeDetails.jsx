@@ -1,9 +1,9 @@
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { Link, useLoaderData, useParams } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const CoffeeDetails = () => {
-   const { id } = useParams();
-   const coffee = useLoaderData();
+   const { taste, name, photo, chef, supplier, details, price } =
+      useLoaderData();
 
    return (
       <div className="mx-5 md:mx-28">
@@ -18,11 +18,7 @@ const CoffeeDetails = () => {
             <div className="bg-base-200 flex items-center py-16 rounded-lg">
                <div className="flex items-center mx-auto">
                   <div>
-                     <img
-                        src={coffee?.photo}
-                        alt="Coffee"
-                        className="w-full h-72"
-                     />
+                     <img src={photo} alt="Coffee" className="w-full h-72" />
                   </div>
 
                   <div className="space-y-2 ml-14">
@@ -31,33 +27,29 @@ const CoffeeDetails = () => {
                      </h1>
 
                      <p>
-                        <span className="font-semibold">Name:</span>{" "}
-                        {coffee?.name}
+                        <span className="font-semibold">Name:</span> {name}
                      </p>
 
                      <p>
-                        <span className="font-semibold">Chef:</span>{" "}
-                        {coffee?.chef}
+                        <span className="font-semibold">Chef:</span> {chef}
                      </p>
 
                      <p>
                         <span className="font-semibold">Supplier:</span>{" "}
-                        {coffee?.supplier}
+                        {supplier}
                      </p>
 
                      <p>
-                        <span className="font-semibold">Taste:</span>{" "}
-                        {coffee?.taste}
+                        <span className="font-semibold">Taste:</span> {taste}
                      </p>
 
                      <p>
-                        <span className="font-semibold">Price: </span>{" "}$
-                        {coffee?.price}
+                        <span className="font-semibold">Price: </span> ${price}
                      </p>
 
                      <p>
                         <span className="font-semibold">Details:</span>{" "}
-                        {coffee?.details}
+                        {details}
                      </p>
                   </div>
                </div>

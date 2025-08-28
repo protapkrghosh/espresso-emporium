@@ -57,18 +57,18 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                </div>
             </Link>
 
-            <Link to={`update-coffee/${_id}`}>
+            <Link to={`update/${_id}`}>
                <div className="text-white bg-[#3C393B] hover:bg-[#5e595c] p-2 w-fit rounded-[5px] cursor-pointer duration-200 my-3">
                   <FaPencil />
                </div>
             </Link>
 
-            <div
+            <button
                onClick={() => handleDelete(_id)}
                className="text-white bg-[#EA4744] hover:bg-red-600 p-2 w-fit rounded-[5px] cursor-pointer duration-200"
             >
                <FaTrashCan />
-            </div>
+            </button>
          </div>
       </div>
    );
