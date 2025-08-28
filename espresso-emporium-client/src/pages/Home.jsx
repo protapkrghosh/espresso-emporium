@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router";
 import CoffeeCard from "../components/CoffeeCard";
 import { BsCupFill } from "react-icons/bs";
-import Header from "../components/Header";
 
 const Home = () => {
    const loadedCoffees = useLoaderData();

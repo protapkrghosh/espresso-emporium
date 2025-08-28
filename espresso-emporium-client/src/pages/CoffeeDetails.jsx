@@ -7,7 +7,7 @@ const CoffeeDetails = () => {
 
    return (
       <div className="mx-5 md:mx-28">
-         <div className="mt-10 max-w-7xl mx-auto">
+         <div className="mt-10 mb-16 max-w-7xl mx-auto">
             <Link
                to={"/"}
                className="rancho text-2xl text-shadow-lg text-shadow-slate-400 text-primary flex items-center gap-2 mb-8"
