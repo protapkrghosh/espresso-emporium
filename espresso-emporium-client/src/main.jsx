@@ -8,6 +8,7 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./components/Home";
 import AddCoffee from "./components/AddCoffee";
 import UpdateCoffee from "./components/UpdateCoffee";
+import PageNotFound from "./pages/PageNotFound";
 
 const router = createBrowserRouter([
    {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       children: [
          {
             index: true,
+            loader: () => fetch(`${import.meta.env.VITE_BASE_URL}/coffees`),
             Component: Home,
          },
          {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
             Component: UpdateCoffee,
          },
       ],
+   },
+   {
+      path: "*",
+      Component: PageNotFound,
    },
 ]);
 
