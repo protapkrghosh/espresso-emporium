@@ -1,4 +1,4 @@
-import React from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router";
 import { FaArrowLeftLong } from "react-icons/fa6";
 
@@ -6,6 +6,24 @@ const AddCoffee = () => {
    const handleAddCoffee = (e) => {
       e.preventDefault();
       const form = e.target;
+      const formData = new FormData(form);
+      const newCoffee = Object.fromEntries(formData);
+
+      // Send coffee data to the DB
+      fetch(`${import.meta.env.VITE_BASE_URL}/coffees`, {
+         method: "POST",
+         headers: {
+            "content-type": "application/json",
+         },
+         body: JSON.stringify(newCoffee),
+      })
+         .then((res) => res.json())
+         .then((data) => {
+            if (data.insertedId) {
+               toast.success("Coffee Added Successfully");
+               form.reset();
+            }
+         });
    };
 
    return (
