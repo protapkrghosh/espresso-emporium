@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { Link, useLoaderData } from "react-router";
-import CoffeeCard from "./CoffeeCard";
+import CoffeeCard from "../components/CoffeeCard";
 import { BsCupFill } from "react-icons/bs";
+import Header from "../components/Header";
 
 const Home = () => {
    const loadedCoffees = useLoaderData();
    const [coffees, setCoffees] = useState(loadedCoffees);
 
    return (
-      <div className="text-center backgroundImg1">
+      <div className="text-center backgroundImg1 mt-28">
+         {/* Our Popular Product */}
          <div className="p-28 backgroundImg2">
             <p className="text-[#1B1A1A] mb-2">-- Sip & Savor --</p>
             <h1 className="rancho text-5xl text-shadow-lg text-shadow-[#331a15be] text-[#331A15]">

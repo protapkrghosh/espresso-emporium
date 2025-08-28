@@ -26,6 +26,12 @@ body {
    @apply hover:bg-[#fff] duration-200
 }
 
+.headerBgImg {
+   background-image: url(../src/assets/more/15.jpg);
+   background-repeat: no-repeat;
+   background-position: center;
+}
+
 .backgroundImg1 {
    background-image: url(../src/assets/more/4.png);
    background-repeat: no-repeat;

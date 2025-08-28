@@ -30,7 +30,7 @@ const AddCoffee = () => {
       <div>
          <Link
             to={"/"}
-            className="rancho text-2xl text-shadow-lg text-shadow-slate-400 text-primary flex items-center gap-2 mb-8 pt-5 px-10"
+            className="rancho text-2xl text-shadow-lg text-shadow-slate-400 text-primary flex items-center gap-2 my-8 px-10"
          >
             <FaArrowLeftLong size={18} /> Back to home
          </Link>

@@ -1,13 +1,41 @@
+import toast from "react-hot-toast";
 import { FaEye } from "react-icons/fa6";
 import { FaPencil } from "react-icons/fa6";
 import { FaTrashCan } from "react-icons/fa6";
 import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
    const { _id, name, photo, chef, price } = coffee;
 
-   const handleDelete = (id) => {
-      console.log(id);
+   const handleDelete = (_id) => {
+      Swal.fire({
+         title: "Are you sure?",
+         text: "You won't be able to revert this!",
+         icon: "warning",
+         showCancelButton: true,
+         confirmButtonColor: "#D2B48C",
+         cancelButtonColor: "#d33",
+         confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+         if (result.isConfirmed) {
+            fetch(`${import.meta.env.VITE_BASE_URL}/coffees/${_id}`, {
+               method: "DELETE",
+            })
+               .then((res) => res.json())
+               .then((data) => {
+                  if (data.deletedCount) {
+                     toast.success("Your coffee has been deleted");
+
+                     // Remove the coffee from the state
+                     const remainingCoffee = coffees.filter(
+                        (coffee) => coffee?._id !== _id
+                     );
+                     setCoffees(remainingCoffee);
+                  }
+               });
+         }
+      });
    };
 
    return (
