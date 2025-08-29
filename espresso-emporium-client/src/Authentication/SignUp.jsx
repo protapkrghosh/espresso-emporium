@@ -1,9 +1,42 @@
-import React, { use } from 'react';
-import { AuthContext } from './contexts/AuthContext';
+import React, { use, useContext } from "react";
+import { AuthContext } from "./contexts/AuthContext";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
-   const { createUser } = use(AuthContext);
-   console.log(createUser);
+   const { createUser } = useContext(AuthContext);
+
+   const handleSignUp = (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
+      const { email, password, ...userProfile } = Object.fromEntries(
+         formData.entries()
+      );
+      // const email = formData.get("email"); // This is another way of getting form input value
+      // const password = formData.get("password"); // This is another way of getting form input value
+
+      // Create user in the firebase
+      createUser(email, password)
+         .then((result) => {
+            console.log(result);
+
+            // Save profile info in the DB
+            fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
+               method: "POST",
+               headers: {
+                  "content-type": "application/json",
+               },
+               body: JSON.stringify(userProfile),
+            })
+               .then((res) => res.json())
+               .then((data) => {
+                  if (data.insertedId) {
+                     toast.success("User has been added successfully");
+                  }
+               });
+         })
+         .catch((error) => console.log(error));
+   };
 
    return (
       <div>
@@ -15,17 +48,58 @@ const SignUp = () => {
                         Sign Up
                      </h1>
 
-                     <fieldset className="fieldset">
+                     <form onSubmit={handleSignUp} className="fieldset">
+                        <label className="label">Name</label>
+                        <input
+                           type="text"
+                           name="name"
+                           placeholder="Hiram Crosby"
+                           required
+                           className="input w-full focus-within:border-accent focus:outline-0"
+                        />
+
+                        <label className="label">Address</label>
+                        <input
+                           type="text"
+                           name="address"
+                           placeholder="789 Pine Lane, Austin"
+                           required
+                           className="input w-full focus-within:border-accent focus:outline-0"
+                        />
+
+                        <label className="label">Phone</label>
+                        <input
+                           type="phone"
+                           name="phone"
+                           placeholder="+1 (555) 987-6543"
+                           required
+                           className="input w-full focus-within:border-accent focus:outline-0"
+                        />
+
+                        <label className="label">Photo URL</label>
+                        <input
+                           type="text"
+                           name="photoURL"
+                           placeholder="https://cdn.pixabay.com/photo/bird.jpg"
+                           required
+                           className="input w-full focus-within:border-accent focus:outline-0"
+                        />
+
                         <label className="label">Email</label>
                         <input
                            type="email"
-                           placeholder="Email"
+                           name="email"
+                           placeholder="hiramcrosby@.gmail.com"
+                           required
                            className="input w-full focus-within:border-accent focus:outline-0"
                         />
+
                         <label className="label">Password</label>
                         <input
                            type="password"
-                           placeholder="Password"
+                           name="password"
+                           placeholder="********"
+                           required
                            className="input w-full focus-within:border-accent focus:outline-0"
                         />
                         <div>
@@ -34,7 +108,7 @@ const SignUp = () => {
                         <button className="btn btn-accent btnHover mt-4">
                            Sign Up
                         </button>
-                     </fieldset>
+                     </form>
                   </div>
                </div>
             </div>
