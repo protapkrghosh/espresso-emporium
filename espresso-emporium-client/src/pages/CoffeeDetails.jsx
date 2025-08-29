@@ -17,7 +17,7 @@ const CoffeeDetails = () => {
 
             <div className="bg-base-200 flex items-center py-16 rounded-lg">
                <div className="flex items-center mx-auto">
-                  <div>
+                  <div className="border-4 rounded-tl-4xl rounded-br-4xl border-[#fff] shadow-md">
                      <img src={photo} alt="Coffee" className="w-full h-72" />
                   </div>
 

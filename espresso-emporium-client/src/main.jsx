@@ -10,6 +10,9 @@ import AddCoffee from "./pages/AddCoffee";
 import UpdateCoffee from "./pages/UpdateCoffee";
 import PageNotFound from "./pages/PageNotFound";
 import CoffeeDetails from "./pages/CoffeeDetails";
+import SignIn from "./Authentication/SignIn";
+import SignUp from "./Authentication/SignUp";
+import AuthProvider from "./Authentication/contexts/AuthProvider";
 
 const router = createBrowserRouter([
    {
@@ -38,6 +41,14 @@ const router = createBrowserRouter([
             Component: UpdateCoffee,
          },
          {
+            path: "signin",
+            Component: SignIn,
+         },
+         {
+            path: "signup",
+            Component: SignUp,
+         },
+         {
             path: "*",
             Component: PageNotFound,
          },
@@ -47,7 +58,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
    <StrictMode>
-      <RouterProvider router={router} />
-      <Toaster position="top-right" reverseOrder={false} />
+      <AuthProvider>
+         <RouterProvider router={router} />
+         <Toaster position="top-right" reverseOrder={false} />
+      </AuthProvider>
    </StrictMode>
 );
