@@ -67,6 +67,11 @@ async function run() {
       });
 
       // User related APIS
+      app.get("/users", async (req, res) => {
+         const result = await usersCollection.find().toArray();
+         res.send(result);
+      });
+
       app.post("/users", async (req, res) => {
          const userProfile = req.body;
          const result = await usersCollection.insertOne(userProfile);

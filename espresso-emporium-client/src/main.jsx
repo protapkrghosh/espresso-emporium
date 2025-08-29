@@ -13,6 +13,7 @@ import CoffeeDetails from "./pages/CoffeeDetails";
 import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
 import AuthProvider from "./Authentication/contexts/AuthProvider";
+import Users from "./pages/Users";
 
 const router = createBrowserRouter([
    {
@@ -47,6 +48,11 @@ const router = createBrowserRouter([
          {
             path: "signup",
             Component: SignUp,
+         },
+         {
+            path: "users",
+            loader: () => fetch(`${import.meta.env.VITE_BASE_URL}/users`),
+            Component: Users,
          },
          {
             path: "*",

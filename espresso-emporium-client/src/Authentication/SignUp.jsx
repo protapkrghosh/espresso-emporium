@@ -9,7 +9,7 @@ const SignUp = () => {
       e.preventDefault();
       const form = e.target;
       const formData = new FormData(form);
-      const { email, password, ...userProfile } = Object.fromEntries(
+      const { email, password, ...restFormData } = Object.fromEntries(
          formData.entries()
       );
       // const email = formData.get("email"); // This is another way of getting form input value
@@ -18,7 +18,13 @@ const SignUp = () => {
       // Create user in the firebase
       createUser(email, password)
          .then((result) => {
-            console.log(result);
+            console.log(result.user);
+            const userProfile = {
+               email,
+               ...restFormData,
+               creationTime: result.user?.metadata.creationTime,
+               lastSignInTime: result.user?.metadata.lastSignInTime,
+            };
 
             // Save profile info in the DB
             fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
@@ -27,6 +33,7 @@ const SignUp = () => {
                   "content-type": "application/json",
                },
                body: JSON.stringify(userProfile),
+               // body: JSON.stringify({ email, ...restFormData, creationTime, lastSignInTime }), // Alternative way
             })
                .then((res) => res.json())
                .then((data) => {
