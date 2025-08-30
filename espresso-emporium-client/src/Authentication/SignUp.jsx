@@ -47,7 +47,7 @@ const SignUp = () => {
 
    return (
       <div>
-         <div className="hero bg-base-200 min-h-screen">
+         <div className="hero bg-base-200 min-h-screen py-12">
             <div className="hero-content w-full flex-col lg:flex-row-reverse">
                <div className=" bg-base-100 w-full max-w-lg shrink-0 p-2 border-[5px] border-[#dedbd2] border-double rounded-2xl">
                   <div className="card-body">
