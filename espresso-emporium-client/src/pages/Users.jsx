@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import { BiEdit } from "react-icons/bi";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TbScanEye } from "react-icons/tb";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { AuthContext } from "../Authentication/contexts/AuthContext";
 
 const Users = () => {
    const initialUsers = useLoaderData();
+   const { removeUser } = useContext(AuthContext);
    const [users, setUsers] = useState(initialUsers);
 
    const handleDelete = (_id) => {
@@ -27,11 +29,19 @@ const Users = () => {
                .then((res) => res.json())
                .then((data) => {
                   if (data.deletedCount) {
-                     toast.success("User has been deleted successfully");
                      const remainingUsers = users.filter(
                         (user) => user?._id !== _id
                      );
                      setUsers(remainingUsers);
+
+                     // Remove the user from the Firebase
+                     removeUser()
+                        .then(() => {
+                           toast.success("User has been deleted successfully");
+                        })
+                        .catch((error) => {
+                           console.log(error);
+                        });
                   }
                });
          }
