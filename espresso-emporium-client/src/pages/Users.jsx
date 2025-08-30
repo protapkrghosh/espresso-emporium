@@ -13,7 +13,7 @@ const Users = () => {
    const handleDelete = (_id) => {
       Swal.fire({
          title: "Are you sure?",
-         text: "You won't be able to revert this!",
+         text: "Your user will not be able to bring it back!",
          icon: "warning",
          showCancelButton: true,
          confirmButtonColor: "#D2B48C",

@@ -27,7 +27,7 @@ const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
                   if (data.deletedCount) {
                      toast.success("Your coffee has been deleted");
 
-                     // Remove the coffee from the state
+                     // Remove the user from the state
                      const remainingCoffee = coffees.filter(
                         (coffee) => coffee?._id !== _id
                      );
