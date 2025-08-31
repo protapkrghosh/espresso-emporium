@@ -1,6 +1,7 @@
 import React, { use, useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import toast from "react-hot-toast";
+import { Link } from "react-router";
 
 const SignUp = () => {
    const { createUser } = useContext(AuthContext);
@@ -18,7 +19,6 @@ const SignUp = () => {
       // Create user in the firebase
       createUser(email, password)
          .then((result) => {
-            console.log(result.user);
             const userProfile = {
                email,
                ...restFormData,
@@ -42,7 +42,7 @@ const SignUp = () => {
                   }
                });
          })
-         .catch((error) => console.log(error));
+         .catch((error) => toast.error(error.code));
    };
 
    return (
@@ -109,9 +109,21 @@ const SignUp = () => {
                         className="input w-full focus-within:border-accent focus:outline-0 mb-2"
                      />
 
-                     <button className="btn btn-accent btnHover mt-4">
+                     <button className="btn btn-accent btnHover mt-4 mb-3">
                         Sign Up
                      </button>
+
+                     <div>
+                        <h5 className="text-center">
+                           Already have an account?{" "}
+                           <Link
+                              to={"/signin"}
+                              className="hover:underline font-semibold"
+                           >
+                              Sign In
+                           </Link>
+                        </h5>
+                     </div>
                   </form>
                </div>
             </div>

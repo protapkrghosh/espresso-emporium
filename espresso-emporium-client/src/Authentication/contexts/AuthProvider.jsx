@@ -4,19 +4,24 @@ import {
    createUserWithEmailAndPassword,
    deleteUser,
    onAuthStateChanged,
+   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
    const [user, setUser] = useState(null);
-   const signInUser = auth.currentUser;
+   const currentUser = auth.currentUser;
 
    const createUser = (email, password) => {
       return createUserWithEmailAndPassword(auth, email, password);
    };
 
+   const signInUser = (email, password) => {
+      return signInWithEmailAndPassword(auth, email, password);
+   };
+
    const removeUser = () => {
-      return deleteUser(signInUser);
+      return deleteUser(currentUser);
    };
 
    useEffect(() => {
@@ -32,6 +37,7 @@ const AuthProvider = ({ children }) => {
    const userInfo = {
       user,
       createUser,
+      signInUser,
       removeUser,
    };
 

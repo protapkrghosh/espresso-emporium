@@ -40,7 +40,7 @@ const Users = () => {
                            toast.success("User has been deleted successfully");
                         })
                         .catch((error) => {
-                           console.log(error);
+                           toast.error(error.code);
                         });
                   }
                });
