@@ -19,7 +19,7 @@ const client = new MongoClient(process.env.COFFEE_DB_URI, {
 
 async function run() {
    try {
-      await client.connect();
+      // await client.connect();
 
       const coffeeCollection = client.db("coffeeDB").collection("coffees");
       const usersCollection = client.db("coffeeDB").collection("users");
@@ -99,10 +99,10 @@ async function run() {
          res.send(result);
       });
 
-      await client.db("admin").command({ ping: 1 });
-      console.log(
-         "Pinged your deployment. You successfully connected to MongoDB!"
-      );
+      // await client.db("admin").command({ ping: 1 });
+      // console.log(
+      //    "Pinged your deployment. You successfully connected to MongoDB!"
+      // );
    } finally {
       // await client.close();
    }
