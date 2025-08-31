@@ -15,13 +15,13 @@ const CoffeeDetails = () => {
                <FaArrowLeftLong size={18} /> Back to home
             </Link>
 
-            <div className="bg-base-200 flex items-center py-16 rounded-lg">
-               <div className="flex items-center mx-auto">
-                  <div className="border-4 rounded-tl-4xl rounded-br-4xl border-[#fff] shadow-md">
-                     <img src={photo} alt="Coffee" className="w-full h-72" />
+            <div className="bg-base-200 flex items-center px-5 md:px-10 py-14 rounded-lg">
+               <div className="flex flex-col lg:flex-row items-center mx-auto">
+                  <div className="border-4 rounded-tl-4xl rounded-br-4xl border-[#fff] shadow-md p-4 w-full lg:w-[30%]">
+                     <img src={photo} alt="Coffee" className="w-full h-60" />
                   </div>
 
-                  <div className="space-y-2 ml-14">
+                  <div className="space-y-2 lg:ml-14 mt-10 lg:mt-0 w-full md:w-[70%]">
                      <h1 className="rancho text-3xl text-shadow-lg text-shadow-[#331a1583] text-[#331A15] mb-7">
                         Niceties
                      </h1>

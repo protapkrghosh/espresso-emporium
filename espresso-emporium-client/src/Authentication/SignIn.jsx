@@ -14,7 +14,7 @@ const SignIn = () => {
       const formData = new FormData(form);
       const email = formData.get("email");
       const password = formData.get("password");
-      console.log(email, password);
+      
       signInUser(email, password)
          .then((result) => {
             const signInInfo = {
@@ -32,10 +32,10 @@ const SignIn = () => {
             })
                .then((res) => res.json())
                .then((data) => {
-                  console.log(data);
+                  toast.success('Sign In successfully')
                });
 
-            // form.reset();
+            form.reset();
          })
          .catch((error) => toast.error(error.code));
    };

@@ -33,14 +33,13 @@ const Users = () => {
                         (user) => user?._id !== _id
                      );
                      setUsers(remainingUsers);
+                     toast.success("User has been deleted successfully");
 
                      // Remove the user from the Firebase
                      removeUser()
-                        .then(() => {
-                           toast.success("User has been deleted successfully");
-                        })
+                        .then(() => {})
                         .catch((error) => {
-                           toast.error(error.code);
+                           console.log(error.code);
                         });
                   }
                });

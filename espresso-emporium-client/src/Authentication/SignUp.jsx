@@ -2,6 +2,8 @@ import React, { use, useContext } from "react";
 import { AuthContext } from "./contexts/AuthContext";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../firebase/firebase.config";
 
 const SignUp = () => {
    const { createUser } = useContext(AuthContext);
@@ -10,6 +12,8 @@ const SignUp = () => {
       e.preventDefault();
       const form = e.target;
       const formData = new FormData(form);
+      const name = formData.get("name");
+      const photoURL = formData.get("photoURL");
       const { email, password, ...restFormData } = Object.fromEntries(
          formData.entries()
       );
@@ -38,8 +42,20 @@ const SignUp = () => {
                .then((res) => res.json())
                .then((data) => {
                   if (data.insertedId) {
-                     toast.success("User has been added successfully");
+                     form.reset();
                   }
+                  // Update user profile
+                  const profile = {
+                     displayName: name,
+                     photoURL: photoURL,
+                  };
+
+                  // Update user profile
+                  updateProfile(auth.currentUser, profile)
+                     .then(() => {
+                        toast.success("User has been added successfully");
+                     })
+                     .catch((error) => toast.error(error.code));
                });
          })
          .catch((error) => toast.error(error.code));
