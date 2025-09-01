@@ -14,6 +14,11 @@ import SignIn from "./Authentication/SignIn";
 import SignUp from "./Authentication/SignUp";
 import AuthProvider from "./Authentication/contexts/AuthProvider";
 import Users from "./pages/Users";
+import {
+   QueryClient,
+   QueryClientProvider,
+} from "@tanstack/react-query";
+import UsersV2 from "./pages/UsersV2";
 
 const router = createBrowserRouter([
    {
@@ -55,6 +60,10 @@ const router = createBrowserRouter([
             Component: Users,
          },
          {
+            path: "usersV2",
+            Component: UsersV2,
+         },
+         {
             path: "*",
             Component: PageNotFound,
          },
@@ -62,11 +71,15 @@ const router = createBrowserRouter([
    },
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
    <StrictMode>
-      <AuthProvider>
-         <RouterProvider router={router} />
-         <Toaster position="top-right" reverseOrder={false} />
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+         <AuthProvider>
+            <RouterProvider router={router} />
+            <Toaster position="top-right" reverseOrder={false} />
+         </AuthProvider>
+      </QueryClientProvider>
    </StrictMode>
 );
