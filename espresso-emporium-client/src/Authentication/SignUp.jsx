@@ -5,6 +5,7 @@ import { Link } from "react-router";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
 import { useState } from "react";
+import axios from "axios";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const SignUp = () => {
@@ -33,18 +34,11 @@ const SignUp = () => {
                lastSignInTime: result.user?.metadata.lastSignInTime,
             };
 
-            // Save profile info in the DB
-            fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
-               method: "POST",
-               headers: {
-                  "content-type": "application/json",
-               },
-               body: JSON.stringify(userProfile),
-               // body: JSON.stringify({ email, ...restFormData, creationTime, lastSignInTime }), // Alternative way
-            })
-               .then((res) => res.json())
+            // Using Axios
+            axios
+               .post(`${import.meta.env.VITE_BASE_URL}/users`, userProfile)
                .then((data) => {
-                  if (data.insertedId) {
+                  if (data.data.insertedId) {
                      form.reset();
                   }
                   // Update user profile
@@ -60,6 +54,34 @@ const SignUp = () => {
                      })
                      .catch((error) => toast.error(error.code));
                });
+
+            // Save profile info in the DB
+            // fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
+            //    method: "POST",
+            //    headers: {
+            //       "content-type": "application/json",
+            //    },
+            //    body: JSON.stringify(userProfile),
+            //    // body: JSON.stringify({ email, ...restFormData, creationTime, lastSignInTime }), // Alternative way
+            // })
+            //    .then((res) => res.json())
+            //    .then((data) => {
+            //       if (data.insertedId) {
+            //          form.reset();
+            //       }
+            //       // Update user profile
+            //       const profile = {
+            //          displayName: name,
+            //          photoURL: photoURL,
+            //       };
+
+            //       // Update user profile
+            //       updateProfile(auth.currentUser, profile)
+            //          .then(() => {
+            //             toast.success("User has been added successfully");
+            //          })
+            //          .catch((error) => toast.error(error.code));
+            //    });
          })
          .catch((error) => toast.error(error.code));
    };

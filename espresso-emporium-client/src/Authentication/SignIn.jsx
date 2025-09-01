@@ -3,6 +3,7 @@ import { AuthContext } from "./contexts/AuthContext";
 import toast from "react-hot-toast";
 import { Link } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa6";
+import axios from "axios";
 
 const SignIn = () => {
    const { signInUser } = useContext(AuthContext);
@@ -14,7 +15,7 @@ const SignIn = () => {
       const formData = new FormData(form);
       const email = formData.get("email");
       const password = formData.get("password");
-      
+
       signInUser(email, password)
          .then((result) => {
             const signInInfo = {
@@ -22,18 +23,26 @@ const SignIn = () => {
                lastSignInTime: result.user?.metadata?.lastSignInTime,
             };
 
-            // Update last sign in to the database
-            fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
-               method: "PATCH",
-               headers: {
-                  "content-type": "application/json",
-               },
-               body: JSON.stringify(signInInfo),
-            })
-               .then((res) => res.json())
+            // Using Axios
+            axios
+               .patch(`${import.meta.env.VITE_BASE_URL}/users`, signInInfo)
                .then((data) => {
-                  toast.success('Sign In successfully')
+                  console.log(data.data);
+                  toast.success("Sign In successfully");
                });
+
+            // Update last sign in to the database
+            // fetch(`${import.meta.env.VITE_BASE_URL}/users`, {
+            //    method: "PATCH",
+            //    headers: {
+            //       "content-type": "application/json",
+            //    },
+            //    body: JSON.stringify(signInInfo),
+            // })
+            //    .then((res) => res.json())
+            //    .then((data) => {
+            //       toast.success('Sign In successfully')
+            //    });
 
             form.reset();
          })
