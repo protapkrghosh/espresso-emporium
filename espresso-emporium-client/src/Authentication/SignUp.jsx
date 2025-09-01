@@ -4,9 +4,12 @@ import toast from "react-hot-toast";
 import { Link } from "react-router";
 import { updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa6";
 
 const SignUp = () => {
    const { createUser } = useContext(AuthContext);
+   const [showPassword, setShowPassword] = useState(false);
 
    const handleSignUp = (e) => {
       e.preventDefault();
@@ -116,14 +119,32 @@ const SignUp = () => {
                         className="input w-full focus-within:border-accent focus:outline-0 mb-2"
                      />
 
-                     <label className="label">Password</label>
-                     <input
-                        type="password"
-                        name="password"
-                        placeholder="********"
-                        required
-                        className="input w-full focus-within:border-accent focus:outline-0 mb-2"
-                     />
+                     <div className="relative">
+                        <label className="label">Password</label>
+                        <input
+                           type={showPassword ? "text" : "password"}
+                           name="password"
+                           placeholder="********"
+                           required
+                           className="input w-full focus-within:border-accent focus:outline-0 mb-2"
+                        />
+
+                        <div className="absolute top-8 right-4 z-50">
+                           {showPassword ? (
+                              <FaEye
+                                 size={16}
+                                 onClick={() => setShowPassword(!showPassword)}
+                                 className="text-[#bdbdbd] cursor-pointer"
+                              />
+                           ) : (
+                              <FaEyeSlash
+                                 size={16}
+                                 onClick={() => setShowPassword(!showPassword)}
+                                 className="text-[#bdbdbd] cursor-pointer"
+                              />
+                           )}
+                        </div>
+                     </div>
 
                      <button className="btn btn-accent btnHover mt-4 mb-3">
                         Sign Up
